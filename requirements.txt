@@ -10,3 +10,4 @@ pygraphviz==1.1
 -e git://github.com/ianozsvald/python-twitter.git@5e8e3db4aaea3acbedd052f04dbfbba97212991f#egg=python_twitter-dev
 simplejson==2.6.2
 wsgiref==0.1.2
+python-twitter

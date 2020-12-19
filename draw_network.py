@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import pygraphviz
 import networkx as nx
 import cPickle
 import pylab
@@ -9,13 +10,19 @@ MAX_FOLLOWERS = 99900  # limit analysis to speed up our development iterations
 # load the follower networks
 af = cPickle.load(open(summarise_data.ALL_NAMES))
 
+print af
+
 # build a graph of all followers
 Gf = nx.Graph()
 for screen_name, followers in af.items():
     some_followers = list(followers)[:MAX_FOLLOWERS]
+    print '3333'
+    print some_followers
+    print '3333'
     Gf.add_node(screen_name)
     Gf.add_nodes_from(some_followers)
     for follower in some_followers:
+        print 'Adding the edge'
         Gf.add_edge(follower, screen_name)
 
 # shave off followers who are follow nobody in our inner network, so NetworkX
@@ -35,7 +42,7 @@ for screen_name, followers in af.items():
 
 # Use graphviz
 prog = "neato"  # neato is default layout engine in GraphViz
-pos = nx.graphviz_layout(Gf, prog=prog, root=None, args="")
+pos = nx.nx_agraph.graphviz_layout(Gf, prog=prog, root=None, args="")
 
 labels = {}
 for node in Gf.nodes():
