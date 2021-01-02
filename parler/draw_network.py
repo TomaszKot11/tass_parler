@@ -38,10 +38,13 @@ for screen_name, followers in af.items():
 #                 nbr_with_no_followers += 1
 #     print "Capping:", screen_name, nbr_with_no_followers
 
+print 'Positions'
 
-
+print '1'
 posDefault = nx.nx_agraph.graphviz_layout(Gf, root=None, args="")
+print '2'
 posFrucht = nx.nx_agraph.graphviz_layout(Gf, prog='fdp', root=None, args="")
+print '3'
 posSpectacular = nx.spectral_layout(Gf) # wartosci wlasne
 
 
@@ -51,10 +54,12 @@ for node in Gf.nodes():
   if len(Gf.edges(node)) > MIN_EDGES_FOR_LABEL:
     labels[node] = node
 
+print 'Before drawing'
+
 # default one
 nx.draw_networkx(Gf, posDefault, with_labels=True, alpha=0.2, labels=labels, font_size=20, font_family='sans-serif')
 pylab.axis("off")
-pylab.title("Parler")
+pylab.title("Parler - Kamady Kawai")
 
 pylab.show()
 
