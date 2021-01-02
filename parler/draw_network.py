@@ -40,7 +40,10 @@ for screen_name, followers in af.items():
 
 
 
-pos = nx.nx_agraph.graphviz_layout(Gf, root=None, args="")
+posDefault = nx.nx_agraph.graphviz_layout(Gf, root=None, args="")
+posFrucht = nx.nx_agraph.graphviz_layout(Gf, prog='fdp', root=None, args="")
+posSpectacular = nx.spectral_layout(Gf) # wartosci wlasne
+
 
 labels = {}
 for node in Gf.nodes():
@@ -48,8 +51,23 @@ for node in Gf.nodes():
   if len(Gf.edges(node)) > MIN_EDGES_FOR_LABEL:
     labels[node] = node
 
-nx.drawing.nx_pylab.draw_kamada_kawai(Gf, with_labels=True, alpha=0.2, labels=labels, font_size=20, font_family='sans-serif')
-
+# default one
+nx.draw_networkx(Gf, posDefault, with_labels=True, alpha=0.2, labels=labels, font_size=20, font_family='sans-serif')
 pylab.axis("off")
 pylab.title("Parler")
+
+pylab.show()
+
+# wartosci wlasne macierzy
+nx.draw_networkx(Gf, posSpectacular, with_labels=True, alpha=0.2, labels=labels, font_size=20, font_family='sans-serif')
+pylab.axis("off")
+pylab.title("Parler - wartosci wlasne ")
+
+pylab.show()
+
+
+nx.draw_networkx(Gf, posFrucht, with_labels=True, alpha=0.2, labels=labels, font_size=20, font_family='sans-serif')
+pylab.axis("off")
+pylab.title("Parler - Fruchterman")
+
 pylab.show()
